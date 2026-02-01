@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
+	public GameManager gameManager;
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.CompareTag("Fruit"))
+		Fruit fruit = collision.gameObject.GetComponent<Fruit>();
+		if (fruit != null)
 		{
-			Debug.Log("Caught a " + collision.gameObject.GetComponent<Fruit>().type);
-			Destroy(collision.gameObject);
+			gameManager.FruitCaught(fruit); 
+			Destroy(collision.gameObject);   
 		}
 	}
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
